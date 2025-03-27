@@ -1,7 +1,9 @@
-name: validart
-description: "A new Flutter package project."
-version: 0.0.1
-homepage:
+name: validifyDart
+description: "A library that provides a wide range of validations in Flutter. It includes validations for personal identifiers, email, URLs, numbers, financial data, and more."
+version: 0.1.2
+homepage: https://github.com/Deep3way/validifyDart
+repository: https://github.com/Deep3way/validifyDart
+issue_tracker: https://github.com/Deep3way/validifyDart/issues
 
 environment:
   sdk: '>=3.3.1 <4.0.0'
@@ -10,6 +12,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  connectivity_plus: ^6.1.3
+  test: ^1.17.0
 
 dev_dependencies:
   flutter_test:
