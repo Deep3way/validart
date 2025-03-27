@@ -2,7 +2,6 @@ library validifyDart;
 
 import 'dart:convert';
 import 'dart:math';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 /// A utility class that provides various methods for validation

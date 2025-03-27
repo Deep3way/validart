@@ -1,6 +1,6 @@
 name: validifyDart
 description: "A library that provides a wide range of validations in Flutter. It includes validations for personal identifiers, email, URLs, numbers, financial data, and more."
-version: 0.1.2
+version: 0.1.0
 homepage: https://github.com/Deep3way/validifyDart
 repository: https://github.com/Deep3way/validifyDart
 issue_tracker: https://github.com/Deep3way/validifyDart/issues

@@ -22,7 +22,7 @@ Add this to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  validifyDart: ^0.1.2
+  validifyDart: ^0.1.0
 ```
 
 ## Usage

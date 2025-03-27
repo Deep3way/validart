@@ -6,10 +6,6 @@
 ```markdown
 # Changelog
 
-## 0.1.2
-
-* Update Description.
-
 ## 0.1.0
 
 * Initial release of the validifyDart package.
