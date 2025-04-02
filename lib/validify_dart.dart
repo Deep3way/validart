@@ -1,18 +1,20 @@
-library validifyDart;
+library validifydart;
 
 import 'dart:convert';
 import 'dart:math';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 /// A utility class that provides various methods for validation
 /// such as phone numbers, email, URLs, financial data, and more.
-class validifyDart {
+class ValidifyDart {
   // == Phone Number Identifiers ==
   /// Validates an international phone number.
   /// The phone number can start with a plus sign followed by country code and digits.
   /// Example: "+14155552671".
-  static bool isValidPhone(String phone) {
-    const regex = r"^\+?[1-9]\d{1,14}$"; // International phone number regex
+  static bool isValidPhone(String? phone) {
+    if (phone == null || phone.isEmpty) return false;
+    const regex = r"^\+?[1-9]\d{1,14}$";
     return RegExp(regex).hasMatch(phone);
   }
 
@@ -87,15 +89,17 @@ class validifyDart {
   /// Checks if the device is connected to the internet.
   /// Returns true if connected to any network (WiFi or mobile data).
   static Future<bool> isConnectedToInternet() async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    return connectivityResult != ConnectivityResult.none;
+    final connectivityResult = await Connectivity().checkConnectivity();
+    // Changed comparison to handle List<ConnectivityResult> in newer versions
+    return connectivityResult.isNotEmpty &&
+        connectivityResult != [ConnectivityResult.none];
   }
-
   /// Checks if the device is connected to WiFi.
   /// Returns true if connected to a WiFi network.
   static Future<bool> isConnectedToWiFi() async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    return connectivityResult == ConnectivityResult.wifi;
+    final connectivityResult = await Connectivity().checkConnectivity();
+    // Changed to handle List<ConnectivityResult>
+    return connectivityResult.contains(ConnectivityResult.wifi);
   }
 
   // == Numbers ==
@@ -272,5 +276,129 @@ class validifyDart {
     } catch (e) {
       return false;
     }
+  }
+
+  static bool isValidSIN(String sin) {
+    final cleanSin = sin.replaceAll(RegExp(r'[\s-]'), '');
+    return RegExp(r'^\d{9}$').hasMatch(cleanSin) && _validateSINChecksum(cleanSin);
+  }
+
+  static bool _validateSINChecksum(String sin) {
+    if (sin.length != 9) return false;
+    int sum = 0;
+    for (int i = 0; i < 9; i++) {
+      int digit = int.parse(sin[i]);
+      if (i % 2 == 1) {
+        digit *= 2;
+        sum += (digit > 9) ? digit - 9 : digit;
+      } else {
+        sum += digit;
+      }
+    }
+    return sum % 10 == 0;
+  }
+
+  // == Advanced Network ==
+
+  /// Validates an IPv4 address
+  /// Format: Four octets separated by dots (e.g., 192.168.1.1)
+  static bool isValidIPv4(String ip) {
+    return RegExp(r'^(\d{1,3}\.){3}\d{1,3}$').hasMatch(ip) &&
+        ip.split('.').every((octet) => int.parse(octet) <= 255);
+  }
+
+  /// Validates a port number
+  /// Range: 0-65535
+  static bool isValidPort(int port) => port >= 0 && port <= 65535;
+
+  // == Geographic ==
+
+  /// Validates latitude value
+  /// Range: -90 to 90 degrees
+  static bool isValidLatitude(double lat) => lat >= -90 && lat <= 90;
+
+  /// Validates longitude value
+  /// Range: -180 to 180 degrees
+  static bool isValidLongitude(double lon) => lon >= -180 && lon <= 180;
+
+  /// Validates a ZIP code (US format)
+  /// Format: 5 digits or 5+4 digits with hyphen (e.g., 12345 or 12345-6789)
+  static bool isValidUSZipCode(String zip) =>
+      RegExp(r'^\d{5}(-\d{4})?$').hasMatch(zip);
+
+  // == Advanced Financial ==
+
+  /// Validates a Bitcoin address (Base58Check format)
+  static bool isValidBitcoinAddress(String address) =>
+      RegExp(r'^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$').hasMatch(address);
+
+  /// Validates an Ethereum address
+  /// Format: 40 hexadecimal characters prefixed with 0x
+  static bool isValidEthereumAddress(String address) =>
+      RegExp(r'^0x[a-fA-F0-9]{40}$').hasMatch(address);
+
+  // == File Formats ==
+
+  /// Validates a file extension
+  static bool isValidFileExtension(String filename, List<String> validExtensions) {
+    final ext = filename.split('.').last.toLowerCase();
+    return validExtensions.contains(ext);
+  }
+
+  /// Validates an ISBN-13 number
+  static bool isValidISBN13(String isbn) {
+    final cleanIsbn = isbn.replaceAll(RegExp(r'[\s-]'), '');
+    if (!RegExp(r'^\d{13}$').hasMatch(cleanIsbn)) return false;
+    int sum = 0;
+    for (int i = 0; i < 13; i++) {
+      sum += int.parse(cleanIsbn[i]) * (i % 2 == 0 ? 1 : 3);
+    }
+    return sum % 10 == 0;
+  }
+
+  // == Security ==
+
+  /// Validates password strength
+  /// Requirements: 8+ chars, 1 uppercase, 1 lowercase, 1 number, 1 special char
+  static bool isStrongPassword(String password) =>
+      password.length >= 8 &&
+          RegExp(r'[A-Z]').hasMatch(password) &&
+          RegExp(r'[a-z]').hasMatch(password) &&
+          RegExp(r'[0-9]').hasMatch(password) &&
+          RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(password);
+
+  // == Miscellaneous ==
+
+  /// Validates a semantic version number
+  /// Format: MAJOR.MINOR.PATCH (e.g., 1.2.3)
+  static bool isValidSemVer(String version) =>
+      RegExp(r'^\d+\.\d+\.\d+$').hasMatch(version);
+
+  /// Validates a VIN (Vehicle Identification Number)
+  /// Format: 17 alphanumeric characters
+  /// Validates a VIN (Vehicle Identification Number).
+  /// Format: 17 alphanumeric characters with a valid check digit (9th position).
+  static bool isValidVIN(String vin) {
+    if (!RegExp(r'^[A-HJ-NPR-Z0-9]{17}$').hasMatch(vin)) return false;
+
+    // VIN character value mapping (A=1, B=2, ..., Z=26, excluding I, O, Q)
+    const vinValues = {
+      'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H': 8,
+      'J': 1, 'K': 2, 'L': 3, 'M': 4, 'N': 5, 'P': 7, 'R': 9,
+      'S': 2, 'T': 3, 'U': 4, 'V': 5, 'W': 6, 'X': 7, 'Y': 8, 'Z': 9,
+      '0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9,
+    };
+
+    // Position weights (1-based index, so subtract 1 for 0-based array)
+    const weights = [8, 7, 6, 5, 4, 3, 2, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2];
+
+    int sum = 0;
+    for (int i = 0; i < 17; i++) {
+      sum += vinValues[vin[i]]! * weights[i];
+    }
+
+    int checkDigit = sum % 11;
+    String expectedCheck = checkDigit == 10 ? 'X' : checkDigit.toString();
+    return vin[8] == expectedCheck;
   }
 }

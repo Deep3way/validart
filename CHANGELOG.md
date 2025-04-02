@@ -6,9 +6,41 @@
 ```markdown
 # Changelog
 
+## 0.2.0
+
+* Added new `ValidifyDartExtended` class with additional validations:
+  * Advanced Personal Identifiers:
+    - Canadian SIN (Social Insurance Number) with checksum validation
+  * Advanced Network:
+    - IPv4 address validation
+    - Port number validation (0-65535)
+  * Geographic:
+    - Latitude validation (-90 to 90)
+    - Longitude validation (-180 to 180)
+    - US ZIP code validation
+  * Advanced Financial:
+    - Bitcoin address validation
+    - Ethereum address validation
+  * File Formats:
+    - File extension validation
+    - ISBN-13 validation with checksum
+  * Security:
+    - Password strength validation
+  * Miscellaneous:
+    - Semantic version number validation
+    - VIN (Vehicle Identification Number) validation
+* Improved library structure and code quality:
+  - Renamed library to `validify_dart` following Dart naming conventions
+  - Renamed class from `validifydart` to `ValidifyDart` to follow UpperCamelCase
+  - Updated connectivity checks to handle `List<ConnectivityResult>` from `connectivity_plus`
+* Added input validation for null/empty checks in key methods
+* Extracted regex patterns into constants for better maintainability
+* Enhanced documentation with parameter and return type details
+* Added comprehensive unit test suite
+
 ## 0.1.0
 
-* Initial release of the validifyDart package.
+* Initial release of the validifydart package.
 * Implemented basic validation methods for:
     * Personal Identifiers:
         - Aadhaar

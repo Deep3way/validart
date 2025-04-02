@@ -1,20 +1,24 @@
+# validifydart
 
-# validifyDart
-
-A library that provides a wide range of validations in Flutter. It includes validations for personal identifiers, email, URLs, numbers, financial data, and more.
+A library that provides a wide range of validations in Flutter. It includes validations for personal
+identifiers, email, URLs, numbers, financial data, and more.
 
 ## Features
 
 - **Email, URL, and IP Validations:** Validate emails, URLs, and IPv6 addresses.
-- **Personal Identifier Validations:** Validate PAN, Aadhaar, Passport, Driving License, Voter ID, and more.
-- **Financial Validations:** Validate Credit Card numbers, GSTIN, IFSC, and UPI IDs.
+- **Personal Identifier Validations:** Validate PAN, Aadhaar, Passport, Driving License, Voter ID,
+  SIN, and more.
+- **Financial Validations:** Validate Credit Card numbers, GSTIN, IFSC, UPI IDs, Bitcoin, and
+  Ethereum addresses.
 - **Mathematical Checks:** Prime numbers, Fibonacci sequence, even/odd, and more.
 - **Connectivity Checks:** Check if the device is connected to the internet or WiFi.
-- **String Validations:** Check for alphabetic, alphanumeric, and palindrome strings, and more.
+- **String Validations:** Check for alphabetic, alphanumeric, palindrome strings, password strength,
+  and more.
 - **Date Validations:** Check for valid date and time formats, and leap year checks.
-- **Hex, Binary, UUID, and MAC Address Validations.**
-- **JSON Validation:** Check if a string is a valid JSON.
-
+- **Geographic Validations:** Validate latitude, longitude, and US ZIP codes.
+- **File Format Validations:** Validate file extensions and ISBN-13 numbers.
+- **Hex, Binary, UUID, MAC Address, and JSON Validations.**
+- **Advanced Formats:** Validate semantic versions and VIN numbers.
 
 ## Installation
 
@@ -22,30 +26,30 @@ Add this to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  validifyDart: ^0.1.0
+  validifydart: ^0.2.0
 ```
 
 ## Usage
 
-To use `validifyDart`, you can directly call its static validation methods like so:
+To use `validifydart`, you can directly call its static validation methods like so:
 
 ### Example:
 
 ```dart
-import 'package:validifyDart/validifyDart.dart';
+import 'package:validifydart/validifydart.dart';
 
 Future<void> main() async {
 // Validate Email
-  bool isEmailValid = validifyDart.isValidEmail("example@example.com");
+  bool isEmailValid = validifydart.isValidEmail("example@example.com");
 
 // Validate Phone Number
-  bool isPhoneValid = validifyDart.isValidPhone("+1234567890");
+  bool isPhoneValid = validifydart.isValidPhone("+1234567890");
 
 // Check if number is prime
-  bool isPrimeNumber = validifyDart.isPrime(7);
+  bool isPrimeNumber = validifydart.isPrime(7);
 
 // Check Internet Connectivity
-  bool isConnected = await validifyDart.isConnectedToInternet();
+  bool isConnected = await validifydart.isConnectedToInternet();
 }
 ```
 
@@ -104,9 +108,38 @@ Future<void> main() async {
     - UUID validity
     - JSON validity
 
+- **Advanced Personal Identifiers:**
+    - Canadian SIN (Social Insurance Number)
+
+- **Advanced Network:**
+    - IPv4 address validation
+    - Port number validation (0-65535)
+
+- **Geographic:**
+    - Latitude validation (-90 to 90)
+    - Longitude validation (-180 to 180)
+
+- **US ZIP code validation**
+
+- **Advanced Financial:**
+    - Bitcoin address validation
+    - Ethereum address validation
+
+- **File Formats:**
+    - File extension validation
+    - ISBN-13 validation
+
+- **Security:**
+    - Password strength validation
+
+- **Miscellaneous:**
+    - Semantic version number validation
+    - VIN (Vehicle Identification Number) validation
+
 ## Contribution
 
-Feel free to fork the repository, create pull requests, and contribute to the library. Please ensure all tests are passing before submitting any changes.
+Feel free to fork the repository, create pull requests, and contribute to the library. Please ensure
+all tests are passing before submitting any changes.
 
 ## License
 
