@@ -94,6 +94,7 @@ class ValidifyDart {
     return connectivityResult.isNotEmpty &&
         connectivityResult != [ConnectivityResult.none];
   }
+
   /// Checks if the device is connected to WiFi.
   /// Returns true if connected to a WiFi network.
   static Future<bool> isConnectedToWiFi() async {
@@ -280,7 +281,8 @@ class ValidifyDart {
 
   static bool isValidSIN(String sin) {
     final cleanSin = sin.replaceAll(RegExp(r'[\s-]'), '');
-    return RegExp(r'^\d{9}$').hasMatch(cleanSin) && _validateSINChecksum(cleanSin);
+    return RegExp(r'^\d{9}$').hasMatch(cleanSin) &&
+        _validateSINChecksum(cleanSin);
   }
 
   static bool _validateSINChecksum(String sin) {
@@ -340,7 +342,8 @@ class ValidifyDart {
   // == File Formats ==
 
   /// Validates a file extension
-  static bool isValidFileExtension(String filename, List<String> validExtensions) {
+  static bool isValidFileExtension(
+      String filename, List<String> validExtensions) {
     final ext = filename.split('.').last.toLowerCase();
     return validExtensions.contains(ext);
   }
@@ -362,10 +365,10 @@ class ValidifyDart {
   /// Requirements: 8+ chars, 1 uppercase, 1 lowercase, 1 number, 1 special char
   static bool isStrongPassword(String password) =>
       password.length >= 8 &&
-          RegExp(r'[A-Z]').hasMatch(password) &&
-          RegExp(r'[a-z]').hasMatch(password) &&
-          RegExp(r'[0-9]').hasMatch(password) &&
-          RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(password);
+      RegExp(r'[A-Z]').hasMatch(password) &&
+      RegExp(r'[a-z]').hasMatch(password) &&
+      RegExp(r'[0-9]').hasMatch(password) &&
+      RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(password);
 
   // == Miscellaneous ==
 
@@ -383,10 +386,39 @@ class ValidifyDart {
 
     // VIN character value mapping (A=1, B=2, ..., Z=26, excluding I, O, Q)
     const vinValues = {
-      'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H': 8,
-      'J': 1, 'K': 2, 'L': 3, 'M': 4, 'N': 5, 'P': 7, 'R': 9,
-      'S': 2, 'T': 3, 'U': 4, 'V': 5, 'W': 6, 'X': 7, 'Y': 8, 'Z': 9,
-      '0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9,
+      'A': 1,
+      'B': 2,
+      'C': 3,
+      'D': 4,
+      'E': 5,
+      'F': 6,
+      'G': 7,
+      'H': 8,
+      'J': 1,
+      'K': 2,
+      'L': 3,
+      'M': 4,
+      'N': 5,
+      'P': 7,
+      'R': 9,
+      'S': 2,
+      'T': 3,
+      'U': 4,
+      'V': 5,
+      'W': 6,
+      'X': 7,
+      'Y': 8,
+      'Z': 9,
+      '0': 0,
+      '1': 1,
+      '2': 2,
+      '3': 3,
+      '4': 4,
+      '5': 5,
+      '6': 6,
+      '7': 7,
+      '8': 8,
+      '9': 9,
     };
 
     // Position weights (1-based index, so subtract 1 for 0-based array)

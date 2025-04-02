@@ -1,10 +1,8 @@
-
 import 'package:validifydart/validify_dart.dart';
 
 Future<void> main() async {
   print(ValidifyDart.isValidEmail("rudradeep@gmail.com")); // true
-  print(ValidifyDart
-      .isConnectedToInternet()); // true
+  print(ValidifyDart.isConnectedToInternet()); // true
 
 // Validating phone number
   bool isPhoneValid = ValidifyDart.isValidPhone('+1234567890');

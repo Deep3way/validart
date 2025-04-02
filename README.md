@@ -26,7 +26,7 @@ Add this to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  validifydart: ^0.2.0
+  validifydart: ^0.3.0
 ```
 
 ## Usage

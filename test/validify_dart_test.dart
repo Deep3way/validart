@@ -48,9 +48,12 @@ void main() {
 
     // == IPv6 Test ==
     test('Valid IPv6 Test', () {
-      expect(ValidifyDart.isValidIPv6('2001:0db8:85a3:0000:0000:8a2e:0370:7334'), true);
+      expect(
+          ValidifyDart.isValidIPv6('2001:0db8:85a3:0000:0000:8a2e:0370:7334'),
+          true);
       expect(ValidifyDart.isValidIPv6('2001:db8:85a3:0:0:8a2e:370:7334'), true);
-      expect(ValidifyDart.isValidIPv6('2001:db8:85a3:0:0:8a2e:370:733g'), false);
+      expect(
+          ValidifyDart.isValidIPv6('2001:db8:85a3:0:0:8a2e:370:733g'), false);
     });
 
     // == ISIN Test ==
@@ -79,8 +82,10 @@ void main() {
 
     // == UUID Test ==
     test('Valid UUID Test', () {
-      expect(ValidifyDart.isValidUUID('123e4567-e89b-12d3-a456-426614174000'), true);
-      expect(ValidifyDart.isValidUUID('123e4567-e89b-12d3-a456-42661417400X'), false);
+      expect(ValidifyDart.isValidUUID('123e4567-e89b-12d3-a456-426614174000'),
+          true);
+      expect(ValidifyDart.isValidUUID('123e4567-e89b-12d3-a456-42661417400X'),
+          false);
     });
 
     // == JSON Test ==
@@ -141,20 +146,28 @@ void main() {
 
     // == Bitcoin Address Test ==
     test('Valid Bitcoin Address Test', () {
-      expect(ValidifyDart.isValidBitcoinAddress('1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa'), true);
+      expect(
+          ValidifyDart.isValidBitcoinAddress(
+              '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa'),
+          true);
       expect(ValidifyDart.isValidBitcoinAddress('invalid'), false);
     });
 
     // == Ethereum Address Test ==
     test('Valid Ethereum Address Test', () {
-      expect(ValidifyDart.isValidEthereumAddress('0x742d35Cc6634C0532925a3b844Bc454e4438f44e'), true);
+      expect(
+          ValidifyDart.isValidEthereumAddress(
+              '0x742d35Cc6634C0532925a3b844Bc454e4438f44e'),
+          true);
       expect(ValidifyDart.isValidEthereumAddress('0x123'), false);
     });
 
     // == File Extension Test ==
     test('Valid File Extension Test', () {
-      expect(ValidifyDart.isValidFileExtension('document.pdf', ['pdf', 'doc']), true);
-      expect(ValidifyDart.isValidFileExtension('image.jpg', ['pdf', 'doc']), false);
+      expect(ValidifyDart.isValidFileExtension('document.pdf', ['pdf', 'doc']),
+          true);
+      expect(ValidifyDart.isValidFileExtension('image.jpg', ['pdf', 'doc']),
+          false);
     });
 
     // == ISBN-13 Test ==
@@ -179,10 +192,13 @@ void main() {
     // == VIN Test ==
     // == VIN Test ==
     test('Valid VIN Test', () {
-      expect(ValidifyDart.isValidVIN('1HGCM82633A004352'), true); // Valid VIN with correct check digit
-      expect(ValidifyDart.isValidVIN('1HGCM82633A00435X'), false); // Invalid check digit
+      expect(ValidifyDart.isValidVIN('1HGCM82633A004352'),
+          true); // Valid VIN with correct check digit
+      expect(ValidifyDart.isValidVIN('1HGCM82633A00435X'),
+          false); // Invalid check digit
       expect(ValidifyDart.isValidVIN('1HGCM82633A00435'), false); // Too short
-      expect(ValidifyDart.isValidVIN('1HGCM82633A00435Q'), false); // Invalid character Q
+      expect(ValidifyDart.isValidVIN('1HGCM82633A00435Q'),
+          false); // Invalid character Q
     });
   });
 }

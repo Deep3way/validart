@@ -6,6 +6,10 @@
 ```markdown
 # Changelog
 
+## 0.3.0
+
+* Improved library structure and code quality
+
 ## 0.2.0
 
 * Added new `ValidifyDartExtended` class with additional validations:
